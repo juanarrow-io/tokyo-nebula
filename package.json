@@ -1,0 +1,65 @@
+{
+  "name": "andromeda-night",
+  "displayName": "Andromeda Night",
+  "description": "A VS Code theme inspired by Andromeda and Tokyo Night.",
+  "version": "0.0.7",
+  "publisher": "ni3rav",
+  "license": "MIT",
+  "author": {
+    "name": "ni3rav"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ni3rav/andromeda-night"
+  },
+  "bugs": {
+    "url": "https://github.com/ni3rav/andromeda-night/issues"
+  },
+  "keywords": [
+    "theme",
+    "dark theme",
+    "andromeda",
+    "tokyo night",
+    "color-theme"
+  ],
+  "engines": {
+    "vscode": "^1.40.0"
+  },
+  "categories": [
+    "Themes"
+  ],
+  "scripts": {
+    "package": "vsce package",
+    "publish": "vsce publish"
+  },
+  "contributes": {
+    "themes": [
+      {
+        "label": "Andromeda Night",
+        "uiTheme": "vs-dark",
+        "path": "./themes/andromeda-night.json"
+      },
+      {
+        "label": "Andromeda Night Italic",
+        "uiTheme": "vs-dark",
+        "path": "./themes/andromeda-night-italic.json"
+      },
+      {
+        "label": "Andromeda Night Equalizer",
+        "uiTheme": "vs-dark",
+        "path": "./themes/equalizer.json"
+      },
+      {
+        "label": "Andromeda Night Dusk",
+        "uiTheme": "vs-dark",
+        "path": "./themes/dusk.json"
+      },
+      {
+        "label": "Andromeda Night Operator",
+        "uiTheme": "vs-dark",
+        "path": "./themes/operator.json"
+      }
+    ]
+  },
+  "icon": "images/icon.png"
+}
