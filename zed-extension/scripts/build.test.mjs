@@ -238,3 +238,31 @@ test('buildFamily: wraps variants into a family object', () => {
   assert.equal(family.themes.length, 1);
   assert.equal(family.themes[0].name, 'Tokyo Nebula');
 });
+
+test('resolveSyntax: merges color and fontStyle from separate tokenColors entries', () => {
+  // The Italic VS Code variant uses two entries for the same scope:
+  // one carries the color, the other carries fontStyle: italic.
+  // The resolver must merge them.
+  const source = {
+    tokenColors: [
+      { scope: 'comment', settings: { foreground: '#515670' } },
+      { scope: 'comment', settings: { fontStyle: 'italic' } },
+    ],
+  };
+  const syntax = resolveSyntax(source);
+  assert.equal(syntax.comment.color, '#515670');
+  assert.equal(syntax.comment.font_style, 'italic');
+});
+
+test('resolveSyntax: color-entry fontStyle wins over a separate style-only entry', () => {
+  // If the color-bearing entry has its own fontStyle, that takes precedence.
+  const source = {
+    tokenColors: [
+      { scope: 'comment', settings: { foreground: '#515670', fontStyle: 'bold' } },
+      { scope: 'comment', settings: { fontStyle: 'italic' } },
+    ],
+  };
+  const syntax = resolveSyntax(source);
+  assert.equal(syntax.comment.font_weight, 700);
+  assert.ok(!('font_style' in syntax.comment));
+});
