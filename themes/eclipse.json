@@ -1,6 +1,5 @@
 {
   "name": "Tokyo Nebula Eclipse",
-  "author": "ni3rav",
   "type": "dark",
   "semanticTokenColors": {
     "parameter.declaration": {
