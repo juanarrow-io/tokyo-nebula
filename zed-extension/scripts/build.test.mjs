@@ -266,3 +266,87 @@ test('resolveSyntax: color-entry fontStyle wins over a separate style-only entry
   assert.equal(syntax.comment.font_weight, 700);
   assert.ok(!('font_style' in syntax.comment));
 });
+
+test('UI_MAP: text uses editor.foreground (not foreground) when both present', () => {
+  const source = {
+    colors: {
+      'editor.foreground': '#a9b1d6',
+      'foreground': '#787c99',
+    },
+  };
+  const ui = resolveUi(source);
+  assert.equal(ui.text, '#a9b1d6');
+});
+
+test('UI_MAP: text falls back to input.foreground if editor.foreground missing', () => {
+  const source = {
+    colors: {
+      'input.foreground': '#a9b1d6',
+      'foreground': '#787c99',
+    },
+  };
+  const ui = resolveUi(source);
+  assert.equal(ui.text, '#a9b1d6');
+});
+
+test('UI_MAP: text.muted prefers foreground over descriptionForeground', () => {
+  const source = {
+    colors: {
+      'foreground': '#787c99',
+      'descriptionForeground': '#515670',
+    },
+  };
+  const ui = resolveUi(source);
+  assert.equal(ui['text.muted'], '#787c99');
+});
+
+test('UI_MAP: icon prefers editor.foreground over foreground when icon.foreground missing', () => {
+  const source = {
+    colors: {
+      'editor.foreground': '#a9b1d6',
+      'foreground': '#787c99',
+    },
+  };
+  const ui = resolveUi(source);
+  assert.equal(ui.icon, '#a9b1d6');
+});
+
+test('UI_MAP: icon.muted prefers foreground over descriptionForeground', () => {
+  const source = {
+    colors: {
+      'foreground': '#787c99',
+      'descriptionForeground': '#515670',
+    },
+  };
+  const ui = resolveUi(source);
+  assert.equal(ui['icon.muted'], '#787c99');
+});
+
+test('UI_MAP: element.background uses list.inactiveSelectionBackground, not button.background', () => {
+  const source = {
+    colors: {
+      'button.background': '#3d59a1dd',
+      'list.inactiveSelectionBackground': '#1c1d29',
+    },
+  };
+  const ui = resolveUi(source);
+  assert.equal(ui['element.background'], '#1c1d29');
+});
+
+test('UI_MAP: ghost_element.background is unmapped (Zed default transparent)', () => {
+  // After the change, ghost_element.background has no source mapping.
+  // It should be absent from UI_MAP entirely so stripNullKeys omits it from output.
+  assert.ok(!('ghost_element.background' in UI_MAP));
+});
+
+test('UI_MAP: text.placeholder falls back to descriptionForeground', () => {
+  const source = { colors: { 'descriptionForeground': '#515670' } };
+  const ui = resolveUi(source);
+  assert.equal(ui['text.placeholder'], '#515670');
+});
+
+test('UI_MAP: text.disabled falls back to descriptionForeground', () => {
+  const source = { colors: { 'descriptionForeground': '#515670' } };
+  const ui = resolveUi(source);
+  assert.equal(ui['text.disabled'], '#515670');
+});
