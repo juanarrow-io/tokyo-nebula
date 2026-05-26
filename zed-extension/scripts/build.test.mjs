@@ -73,3 +73,48 @@ test('UI_MAP: includes the core Zed keys', () => {
     assert.ok(key in UI_MAP, `UI_MAP missing ${key}`);
   }
 });
+
+import { buildPlayers } from './build.mjs';
+
+test('buildPlayers: returns 8 entries', () => {
+  const source = {
+    colors: {
+      'button.background': '#3d59a1',
+      'editorBracketHighlight.foreground1': '#698cd6',
+      'editorBracketHighlight.foreground2': '#68b3de',
+      'editorBracketHighlight.foreground3': '#9a7ecc',
+      'editorBracketHighlight.foreground4': '#25aac2',
+      'editorBracketHighlight.foreground5': '#80a856',
+      'editorBracketHighlight.foreground6': '#c49a5a',
+      'editorWarning.foreground': '#e0af68',
+    },
+  };
+  const players = buildPlayers(source);
+  assert.equal(players.length, 8);
+});
+
+test('buildPlayers: first player uses accent (button.background)', () => {
+  const source = { colors: { 'button.background': '#3d59a1' } };
+  const players = buildPlayers(source);
+  assert.equal(players[0].cursor, '#3d59a1');
+  assert.equal(players[0].selection, '#3d59a1');
+});
+
+test('buildPlayers: bracket colors map to players 1..6', () => {
+  const source = {
+    colors: {
+      'button.background': '#3d59a1',
+      'editorBracketHighlight.foreground1': '#698cd6',
+      'editorBracketHighlight.foreground2': '#68b3de',
+    },
+  };
+  const players = buildPlayers(source);
+  assert.equal(players[1].cursor, '#698cd6');
+  assert.equal(players[2].cursor, '#68b3de');
+});
+
+test('buildPlayers: falls back to accent when bracket colors missing', () => {
+  const source = { colors: { 'button.background': '#3d59a1' } };
+  const players = buildPlayers(source);
+  assert.equal(players[3].cursor, '#3d59a1');
+});

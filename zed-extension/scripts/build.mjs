@@ -148,3 +148,24 @@ export function resolveUi(source) {
   }
   return out;
 }
+
+export function buildPlayers(source) {
+  const colors = (source && source.colors) || {};
+  const accent = normalizeHex(colors['button.background']) || '#7e83b2';
+  const warn = normalizeHex(colors['editorWarning.foreground']) || accent;
+  const bracket = (i) =>
+    normalizeHex(colors[`editorBracketHighlight.foreground${i}`]) || accent;
+
+  const cursors = [
+    accent,
+    bracket(1),
+    bracket(2),
+    bracket(3),
+    bracket(4),
+    bracket(5),
+    bracket(6),
+    warn,
+  ];
+
+  return cursors.map((c) => ({ cursor: c, selection: c, background: c }));
+}
