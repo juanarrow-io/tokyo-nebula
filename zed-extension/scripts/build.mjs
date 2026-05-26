@@ -307,7 +307,7 @@ export function buildFamily(sources) {
   return {
     $schema: 'https://zed.dev/schema/themes/v0.2.0.json',
     name: 'Tokyo Nebula',
-    author: 'ni3rav (port: Paolo Arroyo)',
+    author: 'Paolo Arroyo',
     themes: sources.map(buildVariant),
   };
 }
@@ -317,11 +317,11 @@ import { fileURLToPath, pathToFileURL } from 'node:url';
 import { dirname, join, resolve } from 'node:path';
 
 const SOURCE_FILES = [
-  'tokyo-nebula.json',
-  'tokyo-nebula-italic.json',
-  'equalizer.json',
-  'dusk.json',
-  'operator.json',
+  'andromeda.json',
+  'aurora.json',
+  'eclipse.json',
+  'solstice.json',
+  'polaris.json',
 ];
 
 export async function loadSources(themesDir) {

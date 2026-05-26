@@ -234,7 +234,7 @@ test('buildFamily: wraps variants into a family object', () => {
   const family = buildFamily([source]);
   assert.equal(family['$schema'], 'https://zed.dev/schema/themes/v0.2.0.json');
   assert.equal(family.name, 'Tokyo Nebula');
-  assert.equal(family.author, 'ni3rav (port: Paolo Arroyo)');
+  assert.equal(family.author, 'Paolo Arroyo');
   assert.equal(family.themes.length, 1);
   assert.equal(family.themes[0].name, 'Tokyo Nebula');
 });
