@@ -22,7 +22,7 @@
     "dropdown.background": "#151518",
     "dropdown.border": "#2A2A30",
     "editor.background": "#1D1D21",
-    "editor.findMatchBackground": "#151518",
+    "editor.findMatchBackground": "#D2529F56",
     "editor.findMatchBorder": "#D2529F",
     "editor.findMatchHighlightBackground": "#D2529FEA",
     "editor.findMatchHighlightBorder": "#F5F5F54D",

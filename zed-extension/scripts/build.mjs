@@ -46,7 +46,7 @@ export const UI_MAP = {
   'text.disabled':                             ['disabledForeground', 'descriptionForeground'],
   'text.accent':                               ['textLink.foreground', 'button.background'],
   'icon':                                      ['icon.foreground', 'editor.foreground', 'foreground'],
-  'icon.muted':                                ['foreground', 'descriptionForeground'],
+  'icon.muted':                                ['descriptionForeground', 'foreground'],
   'icon.disabled':                             ['disabledForeground'],
   'icon.placeholder':                          ['input.placeholderForeground'],
   'icon.accent':                               ['textLink.foreground', 'button.background'],

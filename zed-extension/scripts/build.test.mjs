@@ -311,7 +311,7 @@ test('UI_MAP: icon prefers editor.foreground over foreground when icon.foregroun
   assert.equal(ui.icon, '#a9b1d6');
 });
 
-test('UI_MAP: icon.muted prefers foreground over descriptionForeground', () => {
+test('UI_MAP: icon.muted prefers descriptionForeground over foreground (regression: avoid icon/icon.muted collapse)', () => {
   const source = {
     colors: {
       'foreground': '#787c99',
@@ -319,7 +319,7 @@ test('UI_MAP: icon.muted prefers foreground over descriptionForeground', () => {
     },
   };
   const ui = resolveUi(source);
-  assert.equal(ui['icon.muted'], '#787c99');
+  assert.equal(ui['icon.muted'], '#515670');
 });
 
 test('UI_MAP: element.background uses list.inactiveSelectionBackground, not button.background', () => {
@@ -474,6 +474,19 @@ test('UI_MAP: search.active_match_background prefers editor.findMatchBackground'
   };
   const ui = resolveUi(source);
   assert.equal(ui['search.active_match_background'], '#3d59a1');
+});
+
+test('Solstice: search.active_match_background is visible (not equal to sideBar.background)', async () => {
+  const here = dirname(fileURLToPath(import.meta.url));
+  const solsticePath = resolve(here, '..', '..', 'themes', 'solstice.json');
+  const { createRequire } = await import('node:module');
+  const req = createRequire(import.meta.url);
+  const source = req(solsticePath);
+  const sidebarBg = (source.colors['sideBar.background'] || '').toLowerCase();
+  const ui = resolveUi(source);
+  const activeMatchBg = ui['search.active_match_background'];
+  assert.ok(activeMatchBg !== null, 'search.active_match_background must not be null');
+  assert.notEqual(activeMatchBg, sidebarBg, `search.active_match_background (${activeMatchBg}) must differ from sideBar.background (${sidebarBg})`);
 });
 
 test('UI_MAP: search.active_match_background falls back to findMatchHighlightBackground', () => {
