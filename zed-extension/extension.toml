@@ -1,0 +1,7 @@
+schema_version = 1
+id = "tokyo-nebula"
+name = "Tokyo Nebula"
+version = "0.0.1"
+description = "Tokyo Nebula — a dark theme family ported from the Andromeda Night VS Code theme. Five variants: classic, italic, equalizer, dusk, operator."
+authors = ["ni3rav (original)", "Paolo Arroyo (Zed port)"]
+repository = "https://github.com/ni3rav/andromeda-night"
