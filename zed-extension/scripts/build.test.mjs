@@ -599,3 +599,22 @@ test('buildVariant: emits style.accents alongside style.players', () => {
   assert.ok(Array.isArray(variant.style.accents));
   assert.equal(variant.style.accents.length, 5);
 });
+
+import { loadSources } from './build.mjs';
+import { fileURLToPath } from 'node:url';
+import { dirname, join, resolve } from 'node:path';
+
+test('loadSources + buildFamily: 5 variants with the expected celestial names', async () => {
+  const here = dirname(fileURLToPath(import.meta.url));
+  const themesDir = resolve(here, '..', '..', 'themes');
+  const sources = await loadSources(themesDir);
+  const family = buildFamily(sources);
+  const names = family.themes.map((t) => t.name);
+  assert.deepEqual(names, [
+    'Tokyo Nebula Andromeda',
+    'Tokyo Nebula Aurora',
+    'Tokyo Nebula Eclipse',
+    'Tokyo Nebula Solstice',
+    'Tokyo Nebula Polaris',
+  ]);
+});
