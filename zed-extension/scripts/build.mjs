@@ -130,6 +130,18 @@ export const UI_MAP = {
   'predictive':                                ['editorGhostText.foreground', 'descriptionForeground'],
   'predictive.background':                     ['editorGhostText.foreground', 'descriptionForeground'],
   'predictive.border':                         ['editorGhostText.foreground', 'descriptionForeground'],
+  'hidden':                                    ['descriptionForeground'],
+  'hidden.background':                         ['descriptionForeground'],
+  'hidden.border':                             ['descriptionForeground'],
+  'ignored':                                   ['gitDecoration.ignoredResourceForeground', 'disabledForeground'],
+  'ignored.background':                        ['gitDecoration.ignoredResourceForeground', 'disabledForeground'],
+  'ignored.border':                            ['gitDecoration.ignoredResourceForeground', 'disabledForeground'],
+  'renamed':                                   ['gitDecoration.renamedResourceForeground', 'gitDecoration.modifiedResourceForeground'],
+  'renamed.background':                        ['gitDecoration.renamedResourceForeground', 'gitDecoration.modifiedResourceForeground'],
+  'renamed.border':                            ['gitDecoration.renamedResourceForeground', 'gitDecoration.modifiedResourceForeground'],
+  'unreachable':                               ['descriptionForeground'],
+  'unreachable.background':                    ['descriptionForeground'],
+  'unreachable.border':                        ['descriptionForeground'],
 };
 
 export function resolveUi(source) {

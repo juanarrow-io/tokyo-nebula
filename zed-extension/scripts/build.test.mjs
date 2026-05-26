@@ -350,3 +350,59 @@ test('UI_MAP: text.disabled falls back to descriptionForeground', () => {
   const ui = resolveUi(source);
   assert.equal(ui['text.disabled'], '#515670');
 });
+
+test('UI_MAP: hidden triplet maps to descriptionForeground', () => {
+  const source = { colors: { 'descriptionForeground': '#515670' } };
+  const ui = resolveUi(source);
+  assert.equal(ui.hidden, '#515670');
+  assert.equal(ui['hidden.background'], '#515670');
+  assert.equal(ui['hidden.border'], '#515670');
+});
+
+test('UI_MAP: ignored triplet prefers gitDecoration.ignoredResourceForeground', () => {
+  const source = {
+    colors: {
+      'gitDecoration.ignoredResourceForeground': '#404252',
+      'disabledForeground': '#545c7e',
+    },
+  };
+  const ui = resolveUi(source);
+  assert.equal(ui.ignored, '#404252');
+  assert.equal(ui['ignored.background'], '#404252');
+  assert.equal(ui['ignored.border'], '#404252');
+});
+
+test('UI_MAP: ignored triplet falls back to disabledForeground', () => {
+  const source = { colors: { 'disabledForeground': '#545c7e' } };
+  const ui = resolveUi(source);
+  assert.equal(ui.ignored, '#545c7e');
+});
+
+test('UI_MAP: renamed triplet prefers gitDecoration.renamedResourceForeground', () => {
+  const source = {
+    colors: {
+      'gitDecoration.renamedResourceForeground': '#80a856',
+      'gitDecoration.modifiedResourceForeground': '#c49a5a',
+    },
+  };
+  const ui = resolveUi(source);
+  assert.equal(ui.renamed, '#80a856');
+  assert.equal(ui['renamed.background'], '#80a856');
+  assert.equal(ui['renamed.border'], '#80a856');
+});
+
+test('UI_MAP: renamed falls back to modifiedResourceForeground', () => {
+  const source = {
+    colors: { 'gitDecoration.modifiedResourceForeground': '#c49a5a' },
+  };
+  const ui = resolveUi(source);
+  assert.equal(ui.renamed, '#c49a5a');
+});
+
+test('UI_MAP: unreachable triplet maps to descriptionForeground', () => {
+  const source = { colors: { 'descriptionForeground': '#515670' } };
+  const ui = resolveUi(source);
+  assert.equal(ui.unreachable, '#515670');
+  assert.equal(ui['unreachable.background'], '#515670');
+  assert.equal(ui['unreachable.border'], '#515670');
+});
