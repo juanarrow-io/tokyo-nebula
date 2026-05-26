@@ -1,5 +1,6 @@
 {
-  "name": "Andromeda Night Italic",
+  "name": "Tokyo Nebula",
+  "author": "ni3rav",
   "type": "dark",
   "colors": {
     "foreground": "#787c99",
@@ -137,7 +138,7 @@
     "editorOverviewRuler.wordHighlightStrongForeground": "#bb9af766",
     "editorOverviewRuler.modifiedForeground": "#394b70",
     "editorOverviewRuler.addedForeground": "#164846",
-    "editorOverviewRuler.deletedForeground": "#703438",
+    "editorOverviewRuler.deletedForeground -Foreground": "#703438",
     "editorRuler.foreground": "#101014",
     "editorError.foreground": "#db4b4b",
     "editorWarning.foreground": "#e0af68",
@@ -538,13 +539,6 @@
       "scope": ["entity.other.inherited-class"],
       "settings": {
         "fontStyle": "underline"
-      }
-    },
-    {
-      "name": "Font Italic",
-      "scope": ["comment", "invalid", "keyword", "entity.other.attribute-name"],
-      "settings": {
-        "fontStyle": "italic"
       }
     }
   ]
