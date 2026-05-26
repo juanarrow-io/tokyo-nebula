@@ -5,9 +5,9 @@ Status: Approved (pending user review of this written spec)
 
 ## Overview
 
-Port the existing 5-variant VS Code theme (currently published as "Andromeda Night")
-to Zed as a single theme family extension. As part of the port, rebrand the entire
-repository from `andromeda-night` to `tokyo-nebula`. Colors are preserved 1:1 from
+Port the existing 5-variant VS Code theme to Zed as a single theme family extension.
+As part of the port, rebrand the entire repository to `tokyo-nebula`. Colors are
+preserved 1:1 from
 the VS Code sources where Zed has an equivalent key; mapping is lossy in places
 where Zed and VS Code partition the UI/syntax space differently, so a documented
 fallback chain handles missing keys.
@@ -25,7 +25,7 @@ The flagship Zed theme is named **Tokyo Nebula**. The 5 variants:
 In scope:
 
 - Rebrand the existing repo (directory, `package.json`, README, internal theme
-  `name` fields, theme JSON filenames) from `andromeda-night` → `tokyo-nebula`.
+  `name` fields, theme JSON filenames) to `tokyo-nebula`.
 - Generate a Zed extension under `zed-extension/` containing all 5 variants in
   one theme family JSON.
 - Best-effort syntax mapping from VS Code TextMate scopes to Zed tree-sitter
@@ -42,7 +42,7 @@ Out of scope (YAGNI):
 ## File Layout
 
 ```
-tokyo-nebula/                       # renamed from andromeda-night/
+tokyo-nebula/
 ├── package.json                    # name/displayName/labels → "Tokyo Nebula"
 ├── README.md                       # rebranded
 ├── themes/                         # VS Code theme JSONs, renamed
@@ -72,9 +72,9 @@ schema_version = 1
 id = "tokyo-nebula"
 name = "Tokyo Nebula"
 version = "0.0.1"
-description = "Tokyo Nebula — a dark theme family ported from the Andromeda Night VS Code theme."
-authors = ["ni3rav (original)", "Paolo Arroyo (Zed port)"]
-repository = "https://github.com/ni3rav/andromeda-night"
+description = "Tokyo Nebula — a dark theme family for Zed."
+authors = ["Paolo Arroyo"]
+repository = "https://github.com/juanarrow-io/tokyo-nebula"
 ```
 
 ## Zed Family JSON Schema
@@ -85,7 +85,7 @@ The family file follows Zed's `theme.json` v0.2.0 schema:
 {
   "$schema": "https://zed.dev/schema/themes/v0.2.0.json",
   "name": "Tokyo Nebula",
-  "author": "ni3rav (port: Paolo Arroyo)",
+  "author": "Paolo Arroyo",
   "themes": [
     {
       "name": "Tokyo Nebula",
