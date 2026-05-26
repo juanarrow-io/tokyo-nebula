@@ -1,19 +1,18 @@
 {
   "name": "tokyo-nebula",
   "displayName": "Tokyo Nebula",
-  "description": "A VS Code theme family fusing Andromeda's vibrant syntax with Tokyo Night's elegant palette.",
-  "version": "0.0.7",
-  "publisher": "ni3rav",
+  "description": "A five-variant dark theme family for VS Code and Zed: Andromeda, Aurora, Eclipse, Solstice, Polaris.",
+  "version": "0.1.0",
   "license": "MIT",
   "author": {
-    "name": "ni3rav"
+    "name": "Paolo Arroyo"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/ni3rav/andromeda-night"
+    "url": "https://github.com/juanarrow-io/tokyo-nebula"
   },
   "bugs": {
-    "url": "https://github.com/ni3rav/andromeda-night/issues"
+    "url": "https://github.com/juanarrow-io/tokyo-nebula/issues"
   },
   "keywords": [
     "theme",
@@ -35,29 +34,29 @@
   "contributes": {
     "themes": [
       {
-        "label": "Tokyo Nebula",
+        "label": "Tokyo Nebula Andromeda",
         "uiTheme": "vs-dark",
-        "path": "./themes/tokyo-nebula.json"
+        "path": "./themes/andromeda.json"
       },
       {
-        "label": "Tokyo Nebula Italic",
+        "label": "Tokyo Nebula Aurora",
         "uiTheme": "vs-dark",
-        "path": "./themes/tokyo-nebula-italic.json"
+        "path": "./themes/aurora.json"
       },
       {
-        "label": "Tokyo Nebula Equalizer",
+        "label": "Tokyo Nebula Eclipse",
         "uiTheme": "vs-dark",
-        "path": "./themes/equalizer.json"
+        "path": "./themes/eclipse.json"
       },
       {
-        "label": "Tokyo Nebula Dusk",
+        "label": "Tokyo Nebula Solstice",
         "uiTheme": "vs-dark",
-        "path": "./themes/dusk.json"
+        "path": "./themes/solstice.json"
       },
       {
-        "label": "Tokyo Nebula Operator",
+        "label": "Tokyo Nebula Polaris",
         "uiTheme": "vs-dark",
-        "path": "./themes/operator.json"
+        "path": "./themes/polaris.json"
       }
     ]
   },
