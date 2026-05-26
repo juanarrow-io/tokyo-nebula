@@ -248,20 +248,50 @@ function findScopeMatch(tokenColors, prefix) {
   return best;
 }
 
+// Like findScopeMatch but returns the best entry that satisfies a predicate.
+function findScopeMatchWhere(tokenColors, prefix, predicate) {
+  let best = null;
+  let bestLen = -1;
+  for (const entry of tokenColors) {
+    if (!predicate(entry)) continue;
+    const scopes = flattenScopes(entry);
+    for (const scope of scopes) {
+      if (scope === prefix || scope.startsWith(prefix + '.')) {
+        if (scope.length > bestLen) {
+          best = entry;
+          bestLen = scope.length;
+        }
+      }
+    }
+  }
+  return best;
+}
+
 export function resolveSyntax(source) {
   const tokenColors = (source && source.tokenColors) || [];
   const out = {};
   for (const [zedScope, priorities] of Object.entries(SYNTAX_MAP)) {
-    let match = null;
+    let colorMatch = null;
+    let styleMatch = null;
     for (const prefix of priorities) {
-      match = findScopeMatch(tokenColors, prefix);
-      if (match) break;
+      if (!colorMatch) {
+        colorMatch = findScopeMatchWhere(tokenColors, prefix,
+          (e) => !!normalizeHex((e.settings || {}).foreground));
+      }
+      if (!styleMatch) {
+        styleMatch = findScopeMatchWhere(tokenColors, prefix,
+          (e) => !!((e.settings || {}).fontStyle));
+      }
+      if (colorMatch && styleMatch) break;
     }
-    if (!match) continue;
-    const settings = match.settings || {};
-    const color = normalizeHex(settings.foreground);
-    if (!color) continue;
-    const styles = String(settings.fontStyle || '').toLowerCase().split(/\s+/);
+    if (!colorMatch) continue;
+    const colorSettings = colorMatch.settings || {};
+    const color = normalizeHex(colorSettings.foreground);
+    // Merge fontStyle: prefer the color entry's own fontStyle, fall back to
+    // a separate style-only entry that matches the same scope priorities.
+    const rawStyle = colorSettings.fontStyle ||
+      ((styleMatch && styleMatch.settings) ? styleMatch.settings.fontStyle : '');
+    const styles = String(rawStyle || '').toLowerCase().split(/\s+/);
     const entry = { color };
     if (styles.includes('italic')) entry.font_style = 'italic';
     if (styles.includes('bold')) entry.font_weight = 700;
@@ -300,4 +330,50 @@ export function buildFamily(sources) {
     author: 'ni3rav (port: Paolo Arroyo)',
     themes: sources.map(buildVariant),
   };
+}
+
+import { readFile, writeFile, mkdir } from 'node:fs/promises';
+import { fileURLToPath } from 'node:url';
+import { dirname, join, resolve } from 'node:path';
+
+const SOURCE_FILES = [
+  'tokyo-nebula.json',
+  'tokyo-nebula-italic.json',
+  'equalizer.json',
+  'dusk.json',
+  'operator.json',
+];
+
+export async function loadSources(themesDir) {
+  const sources = [];
+  for (const file of SOURCE_FILES) {
+    const path = join(themesDir, file);
+    const raw = await readFile(path, 'utf8');
+    sources.push(JSON.parse(raw));
+  }
+  return sources;
+}
+
+async function main() {
+  const scriptDir = dirname(fileURLToPath(import.meta.url));
+  const repoRoot = resolve(scriptDir, '..', '..');
+  const themesDir = join(repoRoot, 'themes');
+  const outDir = join(scriptDir, '..', 'themes');
+  const outFile = join(outDir, 'tokyo-nebula.json');
+
+  const sources = await loadSources(themesDir);
+  const family = buildFamily(sources);
+
+  await mkdir(outDir, { recursive: true });
+  await writeFile(outFile, JSON.stringify(family, null, 2) + '\n', 'utf8');
+  process.stdout.write(`wrote ${outFile}\n`);
+  process.stdout.write(`  variants: ${family.themes.map((t) => t.name).join(', ')}\n`);
+}
+
+// Run main() only when this file is executed directly, not when imported.
+if (import.meta.url === `file://${process.argv[1]}`) {
+  main().catch((err) => {
+    process.stderr.write(`build failed: ${err.message}\n`);
+    process.exit(1);
+  });
 }
