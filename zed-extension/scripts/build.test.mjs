@@ -200,3 +200,41 @@ test('SYNTAX_MAP: includes core Zed syntax scopes', () => {
     assert.ok(key in SYNTAX_MAP, `SYNTAX_MAP missing ${key}`);
   }
 });
+
+import { buildVariant, buildFamily } from './build.mjs';
+
+test('buildVariant: produces a Zed theme object with name, appearance, style', () => {
+  const source = {
+    name: 'Tokyo Nebula',
+    colors: { 'editor.background': '#1a1b26', 'foreground': '#a9b1d6' },
+    tokenColors: [{ scope: 'comment', settings: { foreground: '#515670' } }],
+  };
+  const variant = buildVariant(source);
+  assert.equal(variant.name, 'Tokyo Nebula');
+  assert.equal(variant.appearance, 'dark');
+  assert.equal(variant.style['editor.background'], '#1a1b26');
+  assert.equal(variant.style.background, '#1a1b26');
+  assert.equal(variant.style.syntax.comment.color, '#515670');
+  assert.equal(variant.style.players.length, 8);
+});
+
+test('buildVariant: omits null UI keys', () => {
+  const source = { name: 'X', colors: { 'foreground': '#a9b1d6' }, tokenColors: [] };
+  const variant = buildVariant(source);
+  // editor.background not provided -> 'background' should be omitted, not null
+  assert.ok(!('background' in variant.style));
+});
+
+test('buildFamily: wraps variants into a family object', () => {
+  const source = {
+    name: 'Tokyo Nebula',
+    colors: { 'editor.background': '#1a1b26', 'foreground': '#a9b1d6' },
+    tokenColors: [],
+  };
+  const family = buildFamily([source]);
+  assert.equal(family['$schema'], 'https://zed.dev/schema/themes/v0.2.0.json');
+  assert.equal(family.name, 'Tokyo Nebula');
+  assert.equal(family.author, 'ni3rav (port: Paolo Arroyo)');
+  assert.equal(family.themes.length, 1);
+  assert.equal(family.themes[0].name, 'Tokyo Nebula');
+});

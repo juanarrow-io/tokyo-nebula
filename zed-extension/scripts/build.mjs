@@ -269,3 +269,35 @@ export function resolveSyntax(source) {
   }
   return out;
 }
+
+function stripNullKeys(obj) {
+  const out = {};
+  for (const [k, v] of Object.entries(obj)) {
+    if (v !== null && v !== undefined) out[k] = v;
+  }
+  return out;
+}
+
+export function buildVariant(source) {
+  const ui = stripNullKeys(resolveUi(source));
+  const syntax = resolveSyntax(source);
+  const players = buildPlayers(source);
+  return {
+    name: source.name,
+    appearance: 'dark',
+    style: {
+      ...ui,
+      players,
+      syntax,
+    },
+  };
+}
+
+export function buildFamily(sources) {
+  return {
+    $schema: 'https://zed.dev/schema/themes/v0.2.0.json',
+    name: 'Tokyo Nebula',
+    author: 'ni3rav (port: Paolo Arroyo)',
+    themes: sources.map(buildVariant),
+  };
+}
