@@ -142,6 +142,13 @@ export const UI_MAP = {
   'unreachable':                               ['descriptionForeground'],
   'unreachable.background':                    ['descriptionForeground'],
   'unreachable.border':                        ['descriptionForeground'],
+  'version_control.added':                     ['gitDecoration.addedResourceForeground'],
+  'version_control.modified':                  ['gitDecoration.modifiedResourceForeground'],
+  'version_control.deleted':                   ['gitDecoration.deletedResourceForeground'],
+  'version_control.word_added':                ['diffEditor.insertedTextBackground'],
+  'version_control.word_deleted':              ['diffEditor.removedTextBackground'],
+  'version_control.conflict_marker.ours':      ['merge.currentHeaderBackground', 'editorWarning.foreground'],
+  'version_control.conflict_marker.theirs':    ['merge.incomingHeaderBackground', 'editorInfo.foreground'],
 };
 
 export function resolveUi(source) {

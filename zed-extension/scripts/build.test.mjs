@@ -406,3 +406,61 @@ test('UI_MAP: unreachable triplet maps to descriptionForeground', () => {
   assert.equal(ui['unreachable.background'], '#515670');
   assert.equal(ui['unreachable.border'], '#515670');
 });
+
+test('UI_MAP: version_control.added maps to gitDecoration.addedResourceForeground', () => {
+  const source = { colors: { 'gitDecoration.addedResourceForeground': '#9ece6a' } };
+  const ui = resolveUi(source);
+  assert.equal(ui['version_control.added'], '#9ece6a');
+});
+
+test('UI_MAP: version_control.modified maps to gitDecoration.modifiedResourceForeground', () => {
+  const source = { colors: { 'gitDecoration.modifiedResourceForeground': '#c49a5a' } };
+  const ui = resolveUi(source);
+  assert.equal(ui['version_control.modified'], '#c49a5a');
+});
+
+test('UI_MAP: version_control.deleted maps to gitDecoration.deletedResourceForeground', () => {
+  const source = { colors: { 'gitDecoration.deletedResourceForeground': '#bb616b' } };
+  const ui = resolveUi(source);
+  assert.equal(ui['version_control.deleted'], '#bb616b');
+});
+
+test('UI_MAP: version_control.word_added maps to diffEditor.insertedTextBackground', () => {
+  const source = { colors: { 'diffEditor.insertedTextBackground': '#1e3a1e80' } };
+  const ui = resolveUi(source);
+  assert.equal(ui['version_control.word_added'], '#1e3a1e80');
+});
+
+test('UI_MAP: version_control.word_deleted maps to diffEditor.removedTextBackground', () => {
+  const source = { colors: { 'diffEditor.removedTextBackground': '#3a1e1e80' } };
+  const ui = resolveUi(source);
+  assert.equal(ui['version_control.word_deleted'], '#3a1e1e80');
+});
+
+test('UI_MAP: conflict_marker.ours prefers merge.currentHeaderBackground', () => {
+  const source = {
+    colors: {
+      'merge.currentHeaderBackground': '#3d59a1',
+      'editorWarning.foreground': '#e0af68',
+    },
+  };
+  const ui = resolveUi(source);
+  assert.equal(ui['version_control.conflict_marker.ours'], '#3d59a1');
+});
+
+test('UI_MAP: conflict_marker.ours falls back to editorWarning.foreground', () => {
+  const source = { colors: { 'editorWarning.foreground': '#e0af68' } };
+  const ui = resolveUi(source);
+  assert.equal(ui['version_control.conflict_marker.ours'], '#e0af68');
+});
+
+test('UI_MAP: conflict_marker.theirs prefers merge.incomingHeaderBackground', () => {
+  const source = {
+    colors: {
+      'merge.incomingHeaderBackground': '#9a7ecc',
+      'editorInfo.foreground': '#7dcfff',
+    },
+  };
+  const ui = resolveUi(source);
+  assert.equal(ui['version_control.conflict_marker.theirs'], '#9a7ecc');
+});
