@@ -199,6 +199,15 @@ export function buildPlayers(source) {
   return cursors.map((c) => ({ cursor: c, selection: c, background: c }));
 }
 
+export function buildAccents(source) {
+  const colors = (source && source.colors) || {};
+  const accent = normalizeHex(colors['button.background']) || '#7e83b2';
+  const bracket = (i) =>
+    normalizeHex(colors[`editorBracketHighlight.foreground${i}`]) || accent;
+
+  return [bracket(1), bracket(2), bracket(3), bracket(4), bracket(5)];
+}
+
 // Zed syntax scope -> ordered list of TextMate scope priorities.
 // The resolver searches each priority in order; first match wins.
 // Within a priority, a tokenColors entry matches if it exactly equals the
@@ -321,12 +330,14 @@ export function buildVariant(source) {
   const ui = stripNullKeys(resolveUi(source));
   const syntax = resolveSyntax(source);
   const players = buildPlayers(source);
+  const accents = buildAccents(source);
   return {
     name: source.name,
     appearance: 'dark',
     style: {
       ...ui,
       players,
+      accents,
       syntax,
     },
   };

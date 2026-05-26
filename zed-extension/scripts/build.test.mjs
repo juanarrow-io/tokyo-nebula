@@ -531,3 +531,71 @@ test('UI_MAP: terminal dim white prefers ansiBrightWhite over ansiWhite', () => 
   const ui = resolveUi(source);
   assert.equal(ui['terminal.ansi.dim_white'], '#ffffff');
 });
+
+import { buildAccents } from './build.mjs';
+
+test('buildAccents: returns 5 entries', () => {
+  const source = {
+    colors: {
+      'button.background': '#3d59a1',
+      'editorBracketHighlight.foreground1': '#698cd6',
+      'editorBracketHighlight.foreground2': '#68b3de',
+      'editorBracketHighlight.foreground3': '#9a7ecc',
+      'editorBracketHighlight.foreground4': '#25aac2',
+      'editorBracketHighlight.foreground5': '#80a856',
+    },
+  };
+  const accents = buildAccents(source);
+  assert.equal(accents.length, 5);
+});
+
+test('buildAccents: uses bracket highlight colors 1..5', () => {
+  const source = {
+    colors: {
+      'button.background': '#3d59a1',
+      'editorBracketHighlight.foreground1': '#698cd6',
+      'editorBracketHighlight.foreground2': '#68b3de',
+      'editorBracketHighlight.foreground3': '#9a7ecc',
+      'editorBracketHighlight.foreground4': '#25aac2',
+      'editorBracketHighlight.foreground5': '#80a856',
+    },
+  };
+  const accents = buildAccents(source);
+  assert.equal(accents[0], '#698cd6');
+  assert.equal(accents[1], '#68b3de');
+  assert.equal(accents[2], '#9a7ecc');
+  assert.equal(accents[3], '#25aac2');
+  assert.equal(accents[4], '#80a856');
+});
+
+test('buildAccents: falls back to button.background when a bracket color is missing', () => {
+  const source = {
+    colors: {
+      'button.background': '#3d59a1',
+      'editorBracketHighlight.foreground1': '#698cd6',
+    },
+  };
+  const accents = buildAccents(source);
+  assert.equal(accents[0], '#698cd6');
+  assert.equal(accents[1], '#3d59a1');
+});
+
+test('buildAccents: returns normalized hex strings', () => {
+  const source = { colors: { 'button.background': '#ABC' } };
+  const accents = buildAccents(source);
+  assert.equal(accents[0], '#aabbcc');
+});
+
+test('buildVariant: emits style.accents alongside style.players', () => {
+  const source = {
+    name: 'Test',
+    colors: {
+      'editor.background': '#1a1b26',
+      'button.background': '#3d59a1',
+    },
+    tokenColors: [],
+  };
+  const variant = buildVariant(source);
+  assert.ok(Array.isArray(variant.style.accents));
+  assert.equal(variant.style.accents.length, 5);
+});
