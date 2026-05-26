@@ -169,3 +169,103 @@ export function buildPlayers(source) {
 
   return cursors.map((c) => ({ cursor: c, selection: c, background: c }));
 }
+
+// Zed syntax scope -> ordered list of TextMate scope priorities.
+// The resolver searches each priority in order; first match wins.
+// Within a priority, a tokenColors entry matches if it exactly equals the
+// priority OR if the tokenColors scope (or any entry of the array) starts
+// with the priority + '.'. Longest match wins inside one priority slot.
+export const SYNTAX_MAP = {
+  'attribute':                     ['entity.other.attribute-name'],
+  'boolean':                       ['constant.language.boolean', 'constant.language'],
+  'comment':                       ['comment.line', 'comment.block', 'comment'],
+  'comment.doc':                   ['comment.block.documentation', 'comment.documentation'],
+  'constant':                      ['variable.other.constant', 'constant.character', 'constant'],
+  'constructor':                   ['entity.name.class', 'entity.name.type.class'],
+  'embedded':                      ['meta.embedded', 'source'],
+  'emphasis':                      ['markup.italic'],
+  'emphasis.strong':               ['markup.bold'],
+  'enum':                          ['entity.name.type.enum', 'variable.other.enummember'],
+  'function':                      ['entity.name.function', 'meta.function-call', 'support.function'],
+  'function.builtin':              ['support.function.builtin', 'support.function'],
+  'function.definition':           ['meta.definition.function', 'entity.name.function'],
+  'function.method':               ['entity.name.function.member', 'meta.function-call.method'],
+  'function.method.builtin':       ['support.function.method', 'support.function.builtin'],
+  'function.special.definition':   ['entity.name.function.preprocessor', 'meta.function.preprocessor'],
+  'keyword':                       ['keyword', 'storage.type', 'storage.modifier'],
+  'keyword.control':               ['keyword.control'],
+  'label':                         ['entity.name.label'],
+  'link_text':                     ['markup.underline.link'],
+  'link_uri':                      ['string.other.link', 'markup.underline.link'],
+  'number':                        ['constant.numeric'],
+  'operator':                      ['keyword.operator'],
+  'preproc':                       ['meta.preprocessor', 'keyword.control.directive'],
+  'property':                      ['variable.other.property', 'meta.object-literal.key', 'support.type.property-name'],
+  'punctuation':                   ['punctuation'],
+  'punctuation.bracket':           ['punctuation.section.brackets', 'meta.brace'],
+  'punctuation.delimiter':         ['punctuation.separator', 'punctuation.terminator'],
+  'punctuation.list_marker':       ['punctuation.definition.list', 'markup.list'],
+  'punctuation.special':           ['punctuation.definition.template-expression'],
+  'string':                        ['string.quoted', 'string'],
+  'string.escape':                 ['constant.character.escape', 'string.escape'],
+  'string.regex':                  ['string.regexp'],
+  'string.special':                ['string.template', 'string.interpolated'],
+  'string.special.symbol':         ['constant.other.symbol'],
+  'tag':                           ['entity.name.tag'],
+  'text.literal':                  ['markup.inline.raw', 'markup.raw'],
+  'title':                         ['markup.heading', 'entity.name.section'],
+  'type':                          ['entity.name.type', 'support.type', 'storage.type'],
+  'type.builtin':                  ['support.type.builtin', 'support.type.primitive'],
+  'variable':                      ['variable.other', 'variable'],
+  'variable.special':              ['variable.language'],
+  'variant':                       ['variable.other.enummember'],
+};
+
+function flattenScopes(entry) {
+  const s = entry.scope;
+  if (!s) return [];
+  if (Array.isArray(s)) return s.map((x) => String(x).trim()).filter(Boolean);
+  // VS Code allows comma-separated scopes in a single string
+  return String(s).split(',').map((x) => x.trim()).filter(Boolean);
+}
+
+function findScopeMatch(tokenColors, prefix) {
+  // Match by exact equality or dotted-prefix (prefix + '.').
+  // Longest matching tokenColors scope wins.
+  let best = null;
+  let bestLen = -1;
+  for (const entry of tokenColors) {
+    const scopes = flattenScopes(entry);
+    for (const scope of scopes) {
+      if (scope === prefix || scope.startsWith(prefix + '.')) {
+        if (scope.length > bestLen) {
+          best = entry;
+          bestLen = scope.length;
+        }
+      }
+    }
+  }
+  return best;
+}
+
+export function resolveSyntax(source) {
+  const tokenColors = (source && source.tokenColors) || [];
+  const out = {};
+  for (const [zedScope, priorities] of Object.entries(SYNTAX_MAP)) {
+    let match = null;
+    for (const prefix of priorities) {
+      match = findScopeMatch(tokenColors, prefix);
+      if (match) break;
+    }
+    if (!match) continue;
+    const settings = match.settings || {};
+    const color = normalizeHex(settings.foreground);
+    if (!color) continue;
+    const styles = String(settings.fontStyle || '').toLowerCase().split(/\s+/);
+    const entry = { color };
+    if (styles.includes('italic')) entry.font_style = 'italic';
+    if (styles.includes('bold')) entry.font_weight = 700;
+    out[zedScope] = entry;
+  }
+  return out;
+}

@@ -118,3 +118,85 @@ test('buildPlayers: falls back to accent when bracket colors missing', () => {
   const players = buildPlayers(source);
   assert.equal(players[3].cursor, '#3d59a1');
 });
+
+import { resolveSyntax, SYNTAX_MAP } from './build.mjs';
+
+test('resolveSyntax: maps a single direct scope', () => {
+  const source = {
+    tokenColors: [
+      { scope: 'comment', settings: { foreground: '#515670' } },
+    ],
+  };
+  const syntax = resolveSyntax(source);
+  assert.equal(syntax.comment.color, '#515670');
+});
+
+test('resolveSyntax: matches by dotted-prefix when exact missing', () => {
+  const source = {
+    tokenColors: [
+      { scope: 'string.quoted.double', settings: { foreground: '#9ece6a' } },
+    ],
+  };
+  const syntax = resolveSyntax(source);
+  // resolver should match 'string.quoted.double' for the 'string' / 'string.quoted' Zed key
+  assert.equal(syntax.string.color, '#9ece6a');
+});
+
+test('resolveSyntax: scope array entries are searched', () => {
+  const source = {
+    tokenColors: [
+      { scope: ['comment', 'punctuation.definition.comment'], settings: { foreground: '#515670' } },
+    ],
+  };
+  const syntax = resolveSyntax(source);
+  assert.equal(syntax.comment.color, '#515670');
+});
+
+test('resolveSyntax: propagates fontStyle italic', () => {
+  const source = {
+    tokenColors: [
+      { scope: 'comment', settings: { foreground: '#515670', fontStyle: 'italic' } },
+    ],
+  };
+  const syntax = resolveSyntax(source);
+  assert.equal(syntax.comment.font_style, 'italic');
+});
+
+test('resolveSyntax: propagates fontStyle bold as font_weight 700', () => {
+  const source = {
+    tokenColors: [
+      { scope: 'keyword', settings: { foreground: '#bb9af7', fontStyle: 'bold' } },
+    ],
+  };
+  const syntax = resolveSyntax(source);
+  assert.equal(syntax.keyword.font_weight, 700);
+});
+
+test('resolveSyntax: omits Zed scope when no source match found', () => {
+  const source = { tokenColors: [] };
+  const syntax = resolveSyntax(source);
+  assert.ok(!('comment' in syntax));
+  assert.ok(!('keyword' in syntax));
+});
+
+test('resolveSyntax: normalizes hex values', () => {
+  const source = {
+    tokenColors: [{ scope: 'comment', settings: { foreground: '#ABC' } }],
+  };
+  const syntax = resolveSyntax(source);
+  assert.equal(syntax.comment.color, '#aabbcc');
+});
+
+test('SYNTAX_MAP: includes core Zed syntax scopes', () => {
+  const required = [
+    'comment', 'string', 'number', 'boolean', 'constant',
+    'keyword', 'keyword.control', 'operator',
+    'function', 'function.method', 'function.builtin',
+    'type', 'type.builtin', 'variable', 'variable.special',
+    'property', 'attribute', 'tag', 'punctuation',
+    'string.escape', 'string.regex', 'comment.doc',
+  ];
+  for (const key of required) {
+    assert.ok(key in SYNTAX_MAP, `SYNTAX_MAP missing ${key}`);
+  }
+});
