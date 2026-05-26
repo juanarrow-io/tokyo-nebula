@@ -464,3 +464,70 @@ test('UI_MAP: conflict_marker.theirs prefers merge.incomingHeaderBackground', ()
   const ui = resolveUi(source);
   assert.equal(ui['version_control.conflict_marker.theirs'], '#9a7ecc');
 });
+
+test('UI_MAP: search.active_match_background prefers editor.findMatchBackground', () => {
+  const source = {
+    colors: {
+      'editor.findMatchBackground': '#3d59a1',
+      'editor.findMatchHighlightBackground': '#3d59a166',
+    },
+  };
+  const ui = resolveUi(source);
+  assert.equal(ui['search.active_match_background'], '#3d59a1');
+});
+
+test('UI_MAP: search.active_match_background falls back to findMatchHighlightBackground', () => {
+  const source = { colors: { 'editor.findMatchHighlightBackground': '#3d59a166' } };
+  const ui = resolveUi(source);
+  assert.equal(ui['search.active_match_background'], '#3d59a166');
+});
+
+test('UI_MAP: editor.hover_line_number prefers active line number color', () => {
+  const source = {
+    colors: {
+      'editorLineNumber.activeForeground': '#a9b1d6',
+      'editorLineNumber.foreground': '#3b4261',
+    },
+  };
+  const ui = resolveUi(source);
+  assert.equal(ui['editor.hover_line_number'], '#a9b1d6');
+});
+
+test('UI_MAP: link_text.hover prefers textLink.activeForeground', () => {
+  const source = {
+    colors: {
+      'textLink.activeForeground': '#7dcfff',
+      'textLink.foreground': '#3d59a1',
+    },
+  };
+  const ui = resolveUi(source);
+  assert.equal(ui['link_text.hover'], '#7dcfff');
+});
+
+test('UI_MAP: terminal dim red maps to terminal.ansiRed (no separate dim in source)', () => {
+  const source = { colors: { 'terminal.ansiRed': '#bb616b' } };
+  const ui = resolveUi(source);
+  assert.equal(ui['terminal.ansi.dim_red'], '#bb616b');
+});
+
+test('UI_MAP: terminal dim black prefers ansiBrightBlack over ansiBlack', () => {
+  const source = {
+    colors: {
+      'terminal.ansiBlack': '#000000',
+      'terminal.ansiBrightBlack': '#414868',
+    },
+  };
+  const ui = resolveUi(source);
+  assert.equal(ui['terminal.ansi.dim_black'], '#414868');
+});
+
+test('UI_MAP: terminal dim white prefers ansiBrightWhite over ansiWhite', () => {
+  const source = {
+    colors: {
+      'terminal.ansiWhite': '#a9b1d6',
+      'terminal.ansiBrightWhite': '#ffffff',
+    },
+  };
+  const ui = resolveUi(source);
+  assert.equal(ui['terminal.ansi.dim_white'], '#ffffff');
+});

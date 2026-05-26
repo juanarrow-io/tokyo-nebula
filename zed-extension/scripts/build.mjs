@@ -58,6 +58,7 @@ export const UI_MAP = {
   'tab.active_background':                     ['tab.activeBackground'],
   'tab.inactive_background':                   ['tab.inactiveBackground'],
   'search.match_background':                   ['editor.findMatchHighlightBackground'],
+  'search.active_match_background':            ['editor.findMatchBackground', 'editor.findMatchHighlightBackground'],
   'panel.background':                          ['panel.background', 'sideBar.background'],
   'panel.focused_border':                      ['focusBorder'],
   'pane.focused_border':                       ['focusBorder'],
@@ -75,6 +76,7 @@ export const UI_MAP = {
   'editor.highlighted_line.background':        ['editor.rangeHighlightBackground'],
   'editor.line_number':                        ['editorLineNumber.foreground'],
   'editor.active_line_number':                 ['editorLineNumber.activeForeground'],
+  'editor.hover_line_number':                  ['editorLineNumber.activeForeground', 'editorLineNumber.foreground'],
   'editor.invisible':                          ['editorWhitespace.foreground'],
   'editor.wrap_guide':                         ['editorIndentGuide.background'],
   'editor.active_wrap_guide':                  ['editorIndentGuide.activeBackground'],
@@ -100,6 +102,14 @@ export const UI_MAP = {
   'terminal.ansi.bright_magenta':              ['terminal.ansiBrightMagenta'],
   'terminal.ansi.bright_cyan':                 ['terminal.ansiBrightCyan'],
   'terminal.ansi.bright_white':                ['terminal.ansiBrightWhite'],
+  'terminal.ansi.dim_black':                   ['terminal.ansiBrightBlack', 'terminal.ansiBlack'],
+  'terminal.ansi.dim_red':                     ['terminal.ansiRed'],
+  'terminal.ansi.dim_green':                   ['terminal.ansiGreen'],
+  'terminal.ansi.dim_yellow':                  ['terminal.ansiYellow'],
+  'terminal.ansi.dim_blue':                    ['terminal.ansiBlue'],
+  'terminal.ansi.dim_magenta':                 ['terminal.ansiMagenta'],
+  'terminal.ansi.dim_cyan':                    ['terminal.ansiCyan'],
+  'terminal.ansi.dim_white':                   ['terminal.ansiBrightWhite', 'terminal.ansiWhite'],
   'created':                                   ['gitDecoration.addedResourceForeground'],
   'modified':                                  ['gitDecoration.modifiedResourceForeground'],
   'deleted':                                   ['gitDecoration.deletedResourceForeground'],
@@ -149,6 +159,7 @@ export const UI_MAP = {
   'version_control.word_deleted':              ['diffEditor.removedTextBackground'],
   'version_control.conflict_marker.ours':      ['merge.currentHeaderBackground', 'editorWarning.foreground'],
   'version_control.conflict_marker.theirs':    ['merge.incomingHeaderBackground', 'editorInfo.foreground'],
+  'link_text.hover':                           ['textLink.activeForeground', 'textLink.foreground'],
 };
 
 export function resolveUi(source) {
