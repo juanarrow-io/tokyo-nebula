@@ -29,3 +29,47 @@ test('normalizeHex: null/undefined returns null', () => {
 test('normalizeHex: strips whitespace', () => {
   assert.equal(normalizeHex('  #abc  '), '#aabbcc');
 });
+
+import { resolveUi, UI_MAP } from './build.mjs';
+
+test('resolveUi: maps a single key', () => {
+  const source = { colors: { 'editor.background': '#1a1b26' } };
+  const ui = resolveUi(source);
+  assert.equal(ui.background, '#1a1b26');
+  assert.equal(ui['editor.background'], '#1a1b26');
+});
+
+test('resolveUi: walks the fallback chain', () => {
+  // panel.border absent, sideBar.border present
+  const source = { colors: { 'sideBar.border': '#101014' } };
+  const ui = resolveUi(source);
+  assert.equal(ui.border, '#101014');
+});
+
+test('resolveUi: missing source key yields null (omitted)', () => {
+  const source = { colors: {} };
+  const ui = resolveUi(source);
+  // background has no fallback; if editor.background is missing it should be null
+  assert.equal(ui.background, null);
+});
+
+test('resolveUi: normalizes hex values', () => {
+  const source = { colors: { 'editor.background': '#ABC' } };
+  const ui = resolveUi(source);
+  assert.equal(ui.background, '#aabbcc');
+});
+
+test('UI_MAP: includes the core Zed keys', () => {
+  const required = [
+    'background', 'foreground', 'border', 'surface.background',
+    'editor.background', 'editor.foreground', 'editor.gutter.background',
+    'editor.line_number', 'editor.active_line.background',
+    'terminal.background', 'tab.active_background', 'tab.inactive_background',
+    'status_bar.background', 'title_bar.background',
+    'scrollbar.thumb.background', 'created', 'modified', 'deleted',
+    'error', 'warning', 'info',
+  ];
+  for (const key of required) {
+    assert.ok(key in UI_MAP, `UI_MAP missing ${key}`);
+  }
+});
