@@ -1,14 +1,14 @@
 # Tokyo Nebula for Zed
 
-A 5-variant dark theme family ported from the [Tokyo Nebula VS Code theme](../README.md).
+A five-variant dark theme family for Zed: Andromeda, Aurora, Eclipse, Solstice, Polaris.
 
 ## Variants
 
-- Tokyo Nebula
-- Tokyo Nebula Italic
-- Tokyo Nebula Equalizer
-- Tokyo Nebula Dusk
-- Tokyo Nebula Operator
+- Tokyo Nebula Andromeda
+- Tokyo Nebula Aurora
+- Tokyo Nebula Eclipse
+- Tokyo Nebula Solstice
+- Tokyo Nebula Polaris
 
 ## Install (from source)
 
