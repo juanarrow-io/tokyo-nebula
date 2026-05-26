@@ -229,26 +229,6 @@ function flattenScopes(entry) {
   return String(s).split(',').map((x) => x.trim()).filter(Boolean);
 }
 
-function findScopeMatch(tokenColors, prefix) {
-  // Match by exact equality or dotted-prefix (prefix + '.').
-  // Longest matching tokenColors scope wins.
-  let best = null;
-  let bestLen = -1;
-  for (const entry of tokenColors) {
-    const scopes = flattenScopes(entry);
-    for (const scope of scopes) {
-      if (scope === prefix || scope.startsWith(prefix + '.')) {
-        if (scope.length > bestLen) {
-          best = entry;
-          bestLen = scope.length;
-        }
-      }
-    }
-  }
-  return best;
-}
-
-// Like findScopeMatch but returns the best entry that satisfies a predicate.
 function findScopeMatchWhere(tokenColors, prefix, predicate) {
   let best = null;
   let bestLen = -1;
@@ -333,7 +313,7 @@ export function buildFamily(sources) {
 }
 
 import { readFile, writeFile, mkdir } from 'node:fs/promises';
-import { fileURLToPath } from 'node:url';
+import { fileURLToPath, pathToFileURL } from 'node:url';
 import { dirname, join, resolve } from 'node:path';
 
 const SOURCE_FILES = [
@@ -371,7 +351,7 @@ async function main() {
 }
 
 // Run main() only when this file is executed directly, not when imported.
-if (import.meta.url === `file://${process.argv[1]}`) {
+if (import.meta.url === pathToFileURL(process.argv[1]).href) {
   main().catch((err) => {
     process.stderr.write(`build failed: ${err.message}\n`);
     process.exit(1);
