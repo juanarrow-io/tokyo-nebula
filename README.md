@@ -2,31 +2,32 @@
 
 ![theme banner](images/main.png)
 
-# Andromeda Night Theme for VS Code
+# Tokyo Nebula
 
-A VS Code theme that fuses the vibrant syntax highlighting of Andromeda with the elegant palette of Tokyo Night, for a visually stunning and comfortable coding experience.
+A theme family fusing the vibrant syntax highlighting of Andromeda with the elegant palette of Tokyo Night, for a visually stunning and comfortable coding experience. Available for VS Code and Zed.
 
-> Tip: For better experience use fonts with italic ligature with italic variant(I'd recommend using Cascadia Code Nerd Font)
+> Tip: For the best experience with italic ligatures, try Cascadia Code Nerd Font.
 
 </div>
 
 ## Variants
 
-This theme comes in five variants:
+- **Tokyo Nebula** — The classic variant: vibrant Andromeda syntax over a Tokyo Night palette
+- **Tokyo Nebula Italic** — Classic variant with italic styling for keywords and comments
+- **Tokyo Nebula Equalizer** — Stealth monochrome variant over the Tokyo Night base, for distraction-free coding
+- **Tokyo Nebula Dusk** — Warm, sunset-tinged variant for evening sessions
+- **Tokyo Nebula Operator** — Navy, low-contrast variant with operator emphasis and subtle borders
 
-- **Andromeda Night** - The classic variant featuring vibrant Andromeda syntax with Tokyo Night's elegant palette
-- **Andromeda Night Italic** - Same as the classic variant with italic font styling for enhanced readability
-- **Andromeda Night Equalizer** - A stealth variant with monochrome colors over Tokyo Night's base for a minimal, distraction-free coding experience
-- **Andromeda Night Dusk** - A warm, dusk-inspired variant with softened sunset tones for a calmer, evening-friendly coding experience
-- **Andromeda Night Operator** - A navy, darker variant of the Andromeda Bordered theme. It emphasizes operators and subtle borders for improved symbol clarity while keeping a deep, low-contrast navy palette.
+## Installation — VS Code
 
-## Installation
+1. Open the Extensions sidebar in Visual Studio Code
+2. Search for **Tokyo Nebula**
+3. Click **Install**, then reload
+4. Preferences > Color Theme > **Tokyo Nebula** (or pick a variant)
 
-1. Open the extensions sidebar in Visual Studio Code
-2. Search for **Andromeda Night**
-3. Click **Install**
-4. Reload your editor
-5. Preferences > Color Theme > **Andromeda Night** (or choose your preferred variant)
+## Installation — Zed
+
+See [`zed-extension/README.md`](./zed-extension/README.md).
 
 ## Credits
 

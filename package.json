@@ -1,7 +1,7 @@
 {
-  "name": "andromeda-night",
-  "displayName": "Andromeda Night",
-  "description": "A VS Code theme inspired by Andromeda and Tokyo Night.",
+  "name": "tokyo-nebula",
+  "displayName": "Tokyo Nebula",
+  "description": "A VS Code theme family fusing Andromeda's vibrant syntax with Tokyo Night's elegant palette.",
   "version": "0.0.7",
   "publisher": "ni3rav",
   "license": "MIT",
@@ -18,8 +18,8 @@
   "keywords": [
     "theme",
     "dark theme",
-    "andromeda",
     "tokyo night",
+    "andromeda",
     "color-theme"
   ],
   "engines": {
@@ -35,27 +35,27 @@
   "contributes": {
     "themes": [
       {
-        "label": "Andromeda Night",
+        "label": "Tokyo Nebula",
         "uiTheme": "vs-dark",
-        "path": "./themes/andromeda-night.json"
+        "path": "./themes/tokyo-nebula.json"
       },
       {
-        "label": "Andromeda Night Italic",
+        "label": "Tokyo Nebula Italic",
         "uiTheme": "vs-dark",
-        "path": "./themes/andromeda-night-italic.json"
+        "path": "./themes/tokyo-nebula-italic.json"
       },
       {
-        "label": "Andromeda Night Equalizer",
+        "label": "Tokyo Nebula Equalizer",
         "uiTheme": "vs-dark",
         "path": "./themes/equalizer.json"
       },
       {
-        "label": "Andromeda Night Dusk",
+        "label": "Tokyo Nebula Dusk",
         "uiTheme": "vs-dark",
         "path": "./themes/dusk.json"
       },
       {
-        "label": "Andromeda Night Operator",
+        "label": "Tokyo Nebula Operator",
         "uiTheme": "vs-dark",
         "path": "./themes/operator.json"
       }
