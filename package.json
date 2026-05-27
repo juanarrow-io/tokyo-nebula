@@ -4,6 +4,7 @@
   "description": "A five-variant dark theme family for VS Code and Zed: Andromeda, Aurora, Eclipse, Solstice, Polaris.",
   "version": "0.1.0",
   "license": "MIT",
+  "publisher": "juanarrow-io",
   "author": {
     "name": "Paolo Arroyo"
   },
