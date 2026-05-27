@@ -749,3 +749,60 @@ test('Polaris palette refresh: deepest bg, blue signature, no orange leftover', 
   assert.equal(styleStr.includes('#f39c12'), false, 'old orange #f39c12 should be fully replaced');
   assert.equal(v.style['terminal.ansi.blue'], '#7aa2f7');
 });
+
+test('Shared diagnostic colors are identical across all 5 variants', async () => {
+  const here = dirname(fileURLToPath(import.meta.url));
+  const themesDir = resolve(here, '..', '..', 'themes');
+  const sources = await loadSources(themesDir);
+  const family = buildFamily(sources);
+  const expected = {
+    error: '#ff6188',
+    warning: '#ffd866',
+    info: '#00d4ff',
+    hint: '#7ce38b',
+  };
+  for (const v of family.themes) {
+    for (const [key, val] of Object.entries(expected)) {
+      assert.equal(v.style[key], val, `${v.name}.${key} expected ${val}`);
+    }
+  }
+});
+
+test('Shared terminal ANSI base palette is identical across all 5 variants', async () => {
+  const here = dirname(fileURLToPath(import.meta.url));
+  const themesDir = resolve(here, '..', '..', 'themes');
+  const sources = await loadSources(themesDir);
+  const family = buildFamily(sources);
+  const expected = {
+    'terminal.ansi.black':   '#0a0c14',
+    'terminal.ansi.red':     '#ff6188',
+    'terminal.ansi.green':   '#7ce38b',
+    'terminal.ansi.yellow':  '#ffd866',
+    'terminal.ansi.blue':    '#7aa2f7',
+    'terminal.ansi.magenta': '#a78bfa',
+    'terminal.ansi.cyan':    '#00d4ff',
+    'terminal.ansi.white':   '#c0caf5',
+  };
+  for (const v of family.themes) {
+    for (const [key, val] of Object.entries(expected)) {
+      assert.equal(v.style[key], val, `${v.name}.${key} expected ${val}`);
+    }
+  }
+});
+
+test('Shared git decoration colors are identical across all 5 variants', async () => {
+  const here = dirname(fileURLToPath(import.meta.url));
+  const themesDir = resolve(here, '..', '..', 'themes');
+  const sources = await loadSources(themesDir);
+  const family = buildFamily(sources);
+  const expected = {
+    created:                 '#7ce38b',
+    modified:                '#7aa2f7',
+    deleted:                 '#ff6188',
+  };
+  for (const v of family.themes) {
+    for (const [key, val] of Object.entries(expected)) {
+      assert.equal(v.style[key], val, `${v.name}.${key} expected ${val}`);
+    }
+  }
+});
