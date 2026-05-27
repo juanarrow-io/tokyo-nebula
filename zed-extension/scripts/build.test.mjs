@@ -682,3 +682,23 @@ test('Aurora palette refresh: bg, signature, italic keyword, diagnostics', async
   assert.equal(v.style.warning, '#ffd866');
   assert.equal(v.style['terminal.ansi.magenta'], '#a78bfa');
 });
+
+test('Eclipse palette refresh: bg, cyan signature, syntax, diagnostics', async () => {
+  const here = dirname(fileURLToPath(import.meta.url));
+  const themesDir = resolve(here, '..', '..', 'themes');
+  const sources = await loadSources(themesDir);
+  const family = buildFamily(sources);
+  const v = family.themes.find((t) => t.name === 'Tokyo Nebula Eclipse');
+  assert.ok(v, 'Eclipse variant present');
+  assert.equal(v.style.background, '#0f131c');
+  assert.equal(v.style['surface.background'], '#0a0e15');
+  assert.equal(v.style.syntax.keyword.color, '#00d4ff');
+  assert.equal(v.style.syntax.string.color, '#a78bfa');
+  assert.equal(v.style.syntax.function.color, '#7ce38b');
+  assert.equal(v.style.syntax.type.color, '#ffd866');
+  assert.equal(v.style.syntax.number.color, '#ffd866');
+  assert.equal(v.style.syntax.comment.color, '#3a5a6a');
+  assert.equal(v.style.error, '#ff6188');
+  assert.equal(v.style.warning, '#ffd866');
+  assert.equal(v.style['terminal.ansi.cyan'], '#00d4ff');
+});
