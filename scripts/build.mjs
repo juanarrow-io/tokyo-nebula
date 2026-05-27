@@ -376,9 +376,9 @@ export async function loadSources(themesDir) {
 
 async function main() {
   const scriptDir = dirname(fileURLToPath(import.meta.url));
-  const repoRoot = resolve(scriptDir, '..', '..');
+  const repoRoot = resolve(scriptDir, '..');
   const themesDir = join(repoRoot, 'themes');
-  const outDir = join(scriptDir, '..', 'themes');
+  const outDir = join(repoRoot, 'dist');
   const outFile = join(outDir, 'tokyo-nebula.json');
 
   const sources = await loadSources(themesDir);

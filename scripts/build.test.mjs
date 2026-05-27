@@ -478,7 +478,7 @@ test('UI_MAP: search.active_match_background prefers editor.findMatchBackground'
 
 test('Solstice: search.active_match_background is visible (not equal to sideBar.background)', async () => {
   const here = dirname(fileURLToPath(import.meta.url));
-  const solsticePath = resolve(here, '..', '..', 'themes', 'solstice.json');
+  const solsticePath = resolve(here, '..', 'themes', 'solstice.json');
   const { createRequire } = await import('node:module');
   const req = createRequire(import.meta.url);
   const source = req(solsticePath);
@@ -619,7 +619,7 @@ import { dirname, join, resolve } from 'node:path';
 
 test('loadSources + buildFamily: 5 variants with the expected celestial names', async () => {
   const here = dirname(fileURLToPath(import.meta.url));
-  const themesDir = resolve(here, '..', '..', 'themes');
+  const themesDir = resolve(here, '..', 'themes');
   const sources = await loadSources(themesDir);
   const family = buildFamily(sources);
   const names = family.themes.map((t) => t.name);
@@ -634,7 +634,7 @@ test('loadSources + buildFamily: 5 variants with the expected celestial names', 
 
 test('Andromeda palette refresh: bg, fg, signature, syntax, diagnostics, ansi', async () => {
   const here = dirname(fileURLToPath(import.meta.url));
-  const themesDir = resolve(here, '..', '..', 'themes');
+  const themesDir = resolve(here, '..', 'themes');
   const sources = await loadSources(themesDir);
   const family = buildFamily(sources);
   const v = family.themes.find((t) => t.name === 'Tokyo Nebula Andromeda');
@@ -663,7 +663,7 @@ test('Andromeda palette refresh: bg, fg, signature, syntax, diagnostics, ansi', 
 
 test('Aurora palette refresh: bg, signature, italic keyword, diagnostics', async () => {
   const here = dirname(fileURLToPath(import.meta.url));
-  const themesDir = resolve(here, '..', '..', 'themes');
+  const themesDir = resolve(here, '..', 'themes');
   const sources = await loadSources(themesDir);
   const family = buildFamily(sources);
   const v = family.themes.find((t) => t.name === 'Tokyo Nebula Aurora');
@@ -685,7 +685,7 @@ test('Aurora palette refresh: bg, signature, italic keyword, diagnostics', async
 
 test('Eclipse palette refresh: bg, cyan signature, syntax, diagnostics', async () => {
   const here = dirname(fileURLToPath(import.meta.url));
-  const themesDir = resolve(here, '..', '..', 'themes');
+  const themesDir = resolve(here, '..', 'themes');
   const sources = await loadSources(themesDir);
   const family = buildFamily(sources);
   const v = family.themes.find((t) => t.name === 'Tokyo Nebula Eclipse');
@@ -705,7 +705,7 @@ test('Eclipse palette refresh: bg, cyan signature, syntax, diagnostics', async (
 
 test('Solstice palette refresh: warm bg, yellow signature, no pink leftover', async () => {
   const here = dirname(fileURLToPath(import.meta.url));
-  const themesDir = resolve(here, '..', '..', 'themes');
+  const themesDir = resolve(here, '..', 'themes');
   const sources = await loadSources(themesDir);
   const family = buildFamily(sources);
   const v = family.themes.find((t) => t.name === 'Tokyo Nebula Solstice');
@@ -728,7 +728,7 @@ test('Solstice palette refresh: warm bg, yellow signature, no pink leftover', as
 
 test('Polaris palette refresh: deepest bg, blue signature, no orange leftover', async () => {
   const here = dirname(fileURLToPath(import.meta.url));
-  const themesDir = resolve(here, '..', '..', 'themes');
+  const themesDir = resolve(here, '..', 'themes');
   const sources = await loadSources(themesDir);
   const family = buildFamily(sources);
   const v = family.themes.find((t) => t.name === 'Tokyo Nebula Polaris');
@@ -752,7 +752,7 @@ test('Polaris palette refresh: deepest bg, blue signature, no orange leftover', 
 
 test('Shared diagnostic colors are identical across all 5 variants', async () => {
   const here = dirname(fileURLToPath(import.meta.url));
-  const themesDir = resolve(here, '..', '..', 'themes');
+  const themesDir = resolve(here, '..', 'themes');
   const sources = await loadSources(themesDir);
   const family = buildFamily(sources);
   const expected = {
@@ -770,7 +770,7 @@ test('Shared diagnostic colors are identical across all 5 variants', async () =>
 
 test('Shared terminal ANSI base palette is identical across all 5 variants', async () => {
   const here = dirname(fileURLToPath(import.meta.url));
-  const themesDir = resolve(here, '..', '..', 'themes');
+  const themesDir = resolve(here, '..', 'themes');
   const sources = await loadSources(themesDir);
   const family = buildFamily(sources);
   const expected = {
@@ -792,7 +792,7 @@ test('Shared terminal ANSI base palette is identical across all 5 variants', asy
 
 test('Shared git decoration colors are identical across all 5 variants', async () => {
   const here = dirname(fileURLToPath(import.meta.url));
-  const themesDir = resolve(here, '..', '..', 'themes');
+  const themesDir = resolve(here, '..', 'themes');
   const sources = await loadSources(themesDir);
   const family = buildFamily(sources);
   const expected = {
@@ -810,7 +810,7 @@ test('Shared git decoration colors are identical across all 5 variants', async (
 
 test('Aurora type scope is NOT italic (regression: resolver should not bleed storage.type italic)', async () => {
   const here = dirname(fileURLToPath(import.meta.url));
-  const themesDir = resolve(here, '..', '..', 'themes');
+  const themesDir = resolve(here, '..', 'themes');
   const sources = await loadSources(themesDir);
   const family = buildFamily(sources);
   const v = family.themes.find((t) => t.name === 'Tokyo Nebula Aurora');
