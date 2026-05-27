@@ -631,3 +631,32 @@ test('loadSources + buildFamily: 5 variants with the expected celestial names', 
     'Tokyo Nebula Polaris',
   ]);
 });
+
+test('Andromeda palette refresh: bg, fg, signature, syntax, diagnostics, ansi', async () => {
+  const here = dirname(fileURLToPath(import.meta.url));
+  const themesDir = resolve(here, '..', '..', 'themes');
+  const sources = await loadSources(themesDir);
+  const family = buildFamily(sources);
+  const v = family.themes.find((t) => t.name === 'Tokyo Nebula Andromeda');
+  assert.ok(v, 'Andromeda variant present');
+  assert.equal(v.style.background, '#15161f');
+  assert.equal(v.style['editor.background'], '#15161f');
+  assert.equal(v.style['surface.background'], '#11121a');
+  assert.equal(v.style.text, '#a9b1d6');
+  assert.equal(v.style.syntax.keyword.color, '#a78bfa');
+  assert.equal(v.style.syntax.string.color, '#7aa2f7');
+  assert.equal(v.style.syntax.function.color, '#ffd866');
+  assert.equal(v.style.syntax.type.color, '#00d4ff');
+  assert.equal(v.style.syntax.number.color, '#7ce38b');
+  assert.equal(v.style.syntax.comment.color, '#5a5d8a');
+  assert.equal(v.style.error, '#ff6188');
+  assert.equal(v.style.warning, '#ffd866');
+  assert.equal(v.style.info, '#00d4ff');
+  assert.equal(v.style.hint, '#7ce38b');
+  assert.equal(v.style['terminal.ansi.magenta'], '#a78bfa');
+  assert.equal(v.style['terminal.ansi.cyan'], '#00d4ff');
+  assert.equal(v.style['terminal.ansi.green'], '#7ce38b');
+  assert.equal(v.style['terminal.ansi.yellow'], '#ffd866');
+  assert.equal(v.style['terminal.ansi.blue'], '#7aa2f7');
+  assert.equal(v.style['terminal.ansi.red'], '#ff6188');
+});
