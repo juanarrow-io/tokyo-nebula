@@ -540,8 +540,7 @@
             "color": "#7ce38b"
           },
           "type": {
-            "color": "#00d4ff",
-            "font_style": "italic"
+            "color": "#00d4ff"
           },
           "variable": {
             "color": "#7aa2f7"
@@ -1196,7 +1195,7 @@
         "version_control.deleted": "#ff6188",
         "version_control.word_added": "#29bf1220",
         "version_control.word_deleted": "#f21b3f20",
-        "version_control.conflict_marker.ours": "#f92672",
+        "version_control.conflict_marker.ours": "#ffd86640",
         "version_control.conflict_marker.theirs": "#3b79c7bb",
         "link_text.hover": "#a4c0ff",
         "players": [

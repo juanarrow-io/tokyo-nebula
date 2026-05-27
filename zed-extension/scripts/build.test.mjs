@@ -799,10 +799,22 @@ test('Shared git decoration colors are identical across all 5 variants', async (
     created:                 '#7ce38b',
     modified:                '#7aa2f7',
     deleted:                 '#ff6188',
+    renamed:                 '#a78bfa',
   };
   for (const v of family.themes) {
     for (const [key, val] of Object.entries(expected)) {
       assert.equal(v.style[key], val, `${v.name}.${key} expected ${val}`);
     }
   }
+});
+
+test('Aurora type scope is NOT italic (regression: resolver should not bleed storage.type italic)', async () => {
+  const here = dirname(fileURLToPath(import.meta.url));
+  const themesDir = resolve(here, '..', '..', 'themes');
+  const sources = await loadSources(themesDir);
+  const family = buildFamily(sources);
+  const v = family.themes.find((t) => t.name === 'Tokyo Nebula Aurora');
+  assert.ok(v, 'Aurora variant present');
+  assert.equal(v.style.syntax.type.color, '#00d4ff');
+  assert.ok(!('font_style' in v.style.syntax.type), 'type scope should not be italic');
 });

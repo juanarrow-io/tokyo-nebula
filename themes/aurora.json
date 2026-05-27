@@ -480,7 +480,8 @@
     {
       "scope": "entity.name.type",
       "settings": {
-        "foreground": "#00d4ff"
+        "foreground": "#00d4ff",
+        "fontStyle": "normal"
       }
     },
     {
@@ -492,7 +493,8 @@
     {
       "scope": "support.type",
       "settings": {
-        "foreground": "#00d4ff"
+        "foreground": "#00d4ff",
+        "fontStyle": "normal"
       }
     },
     {
