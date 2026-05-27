@@ -27,7 +27,11 @@ A five-variant dark theme family fusing the vibrant syntax highlighting of Andro
 
 ## Installation — Zed
 
-See [`zed-extension/README.md`](./zed-extension/README.md).
+Tokyo Nebula for Zed is published as a separate repository:
+[**juanarrow-io/tokyo-nebula-zed**](https://github.com/juanarrow-io/tokyo-nebula-zed).
+
+In Zed: open the command palette (`cmd-shift-p`), run `zed: install dev extension`,
+and pick a local clone of that repo.
 
 ## Credits
 
