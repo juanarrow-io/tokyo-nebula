@@ -30,7 +30,8 @@
   "scripts": {
     "package": "vsce package",
     "publish": "vsce publish",
-    "render:previews": "node scripts/render-previews.mjs"
+    "render:previews": "node scripts/render-previews.mjs",
+    "render:icon": "node scripts/render-icon.mjs"
   },
   "contributes": {
     "themes": [
