@@ -1,7 +1,0 @@
-schema_version = 1
-id = "tokyo-nebula"
-name = "Tokyo Nebula"
-version = "0.1.0"
-description = "Tokyo Nebula — a five-variant dark theme family for Zed: Andromeda, Aurora, Eclipse, Solstice, Polaris."
-authors = ["Paolo Arroyo"]
-repository = "https://github.com/juanarrow-io/tokyo-nebula"
