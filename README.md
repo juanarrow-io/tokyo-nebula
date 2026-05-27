@@ -6,8 +6,6 @@
 
 A five-variant dark theme family fusing the vibrant syntax highlighting of Andromeda with the elegant palette of Tokyo Night. Available for VS Code and Zed.
 
-> Tip: For the best experience with italic ligatures, try Cascadia Code Nerd Font.
-
 </div>
 
 ## Variants
