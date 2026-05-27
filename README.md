@@ -1,6 +1,6 @@
 <div align="center">
 
-![theme banner](images/main.png)
+![Tokyo Nebula — five-variant dark theme family](images/banner.png)
 
 # Tokyo Nebula
 
@@ -12,11 +12,30 @@ A five-variant dark theme family fusing the vibrant syntax highlighting of Andro
 
 ## Variants
 
-- **Tokyo Nebula Andromeda** — Flagship: vibrant Andromeda syntax over a Tokyo Night palette
-- **Tokyo Nebula Aurora** — Andromeda with italic styling for keywords and comments
-- **Tokyo Nebula Eclipse** — Stealth monochrome over the Tokyo Night base, for distraction-free coding
-- **Tokyo Nebula Solstice** — Warm, sunset-tinged variant for evening sessions
-- **Tokyo Nebula Polaris** — Navy, low-contrast variant with operator emphasis and subtle borders
+### Tokyo Nebula Andromeda
+Flagship: vibrant Andromeda syntax over a Tokyo Night palette.
+
+![Andromeda preview](images/andromeda.png)
+
+### Tokyo Nebula Aurora
+Andromeda with italic styling for keywords and comments.
+
+![Aurora preview](images/aurora.png)
+
+### Tokyo Nebula Eclipse
+Stealth monochrome over the Tokyo Night base, for distraction-free coding.
+
+![Eclipse preview](images/eclipse.png)
+
+### Tokyo Nebula Solstice
+Warm, sunset-tinged variant for evening sessions.
+
+![Solstice preview](images/solstice.png)
+
+### Tokyo Nebula Polaris
+Navy, low-contrast variant with operator emphasis and subtle borders.
+
+![Polaris preview](images/polaris.png)
 
 ## Installation — VS Code
 

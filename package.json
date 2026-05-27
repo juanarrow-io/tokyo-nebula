@@ -29,7 +29,8 @@
   ],
   "scripts": {
     "package": "vsce package",
-    "publish": "vsce publish"
+    "publish": "vsce publish",
+    "render:previews": "node scripts/render-previews.mjs"
   },
   "contributes": {
     "themes": [
@@ -60,5 +61,9 @@
       }
     ]
   },
-  "icon": "images/icon.png"
+  "icon": "images/icon.png",
+  "devDependencies": {
+    "playwright": "^1.60.0",
+    "shiki": "^4.1.0"
+  }
 }
