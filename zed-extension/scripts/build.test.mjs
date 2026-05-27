@@ -725,3 +725,27 @@ test('Solstice palette refresh: warm bg, yellow signature, no pink leftover', as
   assert.equal(styleStr.includes('#d2529f'), false, 'old pink signature should be fully replaced');
   assert.equal(v.style['terminal.ansi.magenta'], '#a78bfa');
 });
+
+test('Polaris palette refresh: deepest bg, blue signature, no orange leftover', async () => {
+  const here = dirname(fileURLToPath(import.meta.url));
+  const themesDir = resolve(here, '..', '..', 'themes');
+  const sources = await loadSources(themesDir);
+  const family = buildFamily(sources);
+  const v = family.themes.find((t) => t.name === 'Tokyo Nebula Polaris');
+  assert.ok(v, 'Polaris variant present');
+  assert.equal(v.style.background, '#0a0c14');
+  assert.equal(v.style['surface.background'], '#06080d');
+  assert.equal(v.style.text, '#d5ced9');
+  assert.equal(v.style.syntax.keyword.color, '#7aa2f7');
+  assert.equal(v.style.syntax.string.color, '#a78bfa');
+  assert.equal(v.style.syntax.function.color, '#00d4ff');
+  assert.equal(v.style.syntax.type.color, '#ffd866');
+  assert.equal(v.style.syntax.number.color, '#7ce38b');
+  assert.equal(v.style.syntax.comment.color, '#3a4e6a');
+  assert.equal(v.style.error, '#ff6188');
+  assert.equal(v.style.warning, '#ffd866');
+  const styleStr = JSON.stringify(v.style).toLowerCase();
+  assert.equal(styleStr.includes('#ffe66d'), false, 'old yellow #FFE66D should be fully replaced');
+  assert.equal(styleStr.includes('#f39c12'), false, 'old orange #f39c12 should be fully replaced');
+  assert.equal(v.style['terminal.ansi.blue'], '#7aa2f7');
+});
