@@ -702,3 +702,26 @@ test('Eclipse palette refresh: bg, cyan signature, syntax, diagnostics', async (
   assert.equal(v.style.warning, '#ffd866');
   assert.equal(v.style['terminal.ansi.cyan'], '#00d4ff');
 });
+
+test('Solstice palette refresh: warm bg, yellow signature, no pink leftover', async () => {
+  const here = dirname(fileURLToPath(import.meta.url));
+  const themesDir = resolve(here, '..', '..', 'themes');
+  const sources = await loadSources(themesDir);
+  const family = buildFamily(sources);
+  const v = family.themes.find((t) => t.name === 'Tokyo Nebula Solstice');
+  assert.ok(v, 'Solstice variant present');
+  assert.equal(v.style.background, '#181611');
+  assert.equal(v.style['surface.background'], '#13110d');
+  assert.equal(v.style.text, '#e8e1d0');
+  assert.equal(v.style.syntax.keyword.color, '#ffd866');
+  assert.equal(v.style.syntax.string.color, '#a78bfa');
+  assert.equal(v.style.syntax.function.color, '#7ce38b');
+  assert.equal(v.style.syntax.type.color, '#7aa2f7');
+  assert.equal(v.style.syntax.number.color, '#7ce38b');
+  assert.equal(v.style.syntax.comment.color, '#6a5a3a');
+  assert.equal(v.style.error, '#ff6188');
+  assert.equal(v.style.warning, '#ffd866');
+  const styleStr = JSON.stringify(v.style).toLowerCase();
+  assert.equal(styleStr.includes('#d2529f'), false, 'old pink signature should be fully replaced');
+  assert.equal(v.style['terminal.ansi.magenta'], '#a78bfa');
+});
