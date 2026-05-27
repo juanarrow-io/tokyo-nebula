@@ -1,25 +1,24 @@
 {
-  "name": "andromeda-night",
-  "displayName": "Andromeda Night",
-  "description": "A VS Code theme inspired by Andromeda and Tokyo Night.",
-  "version": "0.0.7",
-  "publisher": "ni3rav",
+  "name": "tokyo-nebula",
+  "displayName": "Tokyo Nebula",
+  "description": "A five-variant dark theme family for VS Code and Zed: Andromeda, Aurora, Eclipse, Solstice, Polaris.",
+  "version": "0.1.0",
   "license": "MIT",
   "author": {
-    "name": "ni3rav"
+    "name": "Paolo Arroyo"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/ni3rav/andromeda-night"
+    "url": "https://github.com/juanarrow-io/tokyo-nebula"
   },
   "bugs": {
-    "url": "https://github.com/ni3rav/andromeda-night/issues"
+    "url": "https://github.com/juanarrow-io/tokyo-nebula/issues"
   },
   "keywords": [
     "theme",
     "dark theme",
-    "andromeda",
     "tokyo night",
+    "andromeda",
     "color-theme"
   ],
   "engines": {
@@ -35,29 +34,29 @@
   "contributes": {
     "themes": [
       {
-        "label": "Andromeda Night",
+        "label": "Tokyo Nebula Andromeda",
         "uiTheme": "vs-dark",
-        "path": "./themes/andromeda-night.json"
+        "path": "./themes/andromeda.json"
       },
       {
-        "label": "Andromeda Night Italic",
+        "label": "Tokyo Nebula Aurora",
         "uiTheme": "vs-dark",
-        "path": "./themes/andromeda-night-italic.json"
+        "path": "./themes/aurora.json"
       },
       {
-        "label": "Andromeda Night Equalizer",
+        "label": "Tokyo Nebula Eclipse",
         "uiTheme": "vs-dark",
-        "path": "./themes/equalizer.json"
+        "path": "./themes/eclipse.json"
       },
       {
-        "label": "Andromeda Night Dusk",
+        "label": "Tokyo Nebula Solstice",
         "uiTheme": "vs-dark",
-        "path": "./themes/dusk.json"
+        "path": "./themes/solstice.json"
       },
       {
-        "label": "Andromeda Night Operator",
+        "label": "Tokyo Nebula Polaris",
         "uiTheme": "vs-dark",
-        "path": "./themes/operator.json"
+        "path": "./themes/polaris.json"
       }
     ]
   },
