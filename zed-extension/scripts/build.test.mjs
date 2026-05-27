@@ -660,3 +660,25 @@ test('Andromeda palette refresh: bg, fg, signature, syntax, diagnostics, ansi', 
   assert.equal(v.style['terminal.ansi.blue'], '#7aa2f7');
   assert.equal(v.style['terminal.ansi.red'], '#ff6188');
 });
+
+test('Aurora palette refresh: bg, signature, italic keyword, diagnostics', async () => {
+  const here = dirname(fileURLToPath(import.meta.url));
+  const themesDir = resolve(here, '..', '..', 'themes');
+  const sources = await loadSources(themesDir);
+  const family = buildFamily(sources);
+  const v = family.themes.find((t) => t.name === 'Tokyo Nebula Aurora');
+  assert.ok(v, 'Aurora variant present');
+  assert.equal(v.style.background, '#15161f');
+  assert.equal(v.style.syntax.keyword.color, '#7ce38b');
+  assert.equal(v.style.syntax.keyword.font_style, 'italic');
+  assert.equal(v.style.syntax.comment.color, '#5a5d8a');
+  assert.equal(v.style.syntax.comment.font_style, 'italic');
+  assert.equal(v.style.syntax.string.color, '#a78bfa');
+  assert.equal(v.style.syntax.function.color, '#ffd866');
+  assert.equal(v.style.syntax.type.color, '#00d4ff');
+  assert.equal(v.style.syntax.number.color, '#00d4ff');
+  assert.equal(v.style.syntax.variable.color, '#7aa2f7');
+  assert.equal(v.style.error, '#ff6188');
+  assert.equal(v.style.warning, '#ffd866');
+  assert.equal(v.style['terminal.ansi.magenta'], '#a78bfa');
+});
