@@ -4,7 +4,9 @@
 
 # Tokyo Nebula
 
-A five-variant dark theme family fusing the vibrant syntax highlighting of Andromeda with the elegant palette of Tokyo Night. Available for VS Code and Zed.
+A five-variant dark theme family fusing Andromeda's bright, high-contrast syntax highlighting and favorites from Tokyo Night's neon palette. Available for VS Code and Zed.
+
+> Recommended Font: Monaspace Neon NF
 
 </div>
 
@@ -21,7 +23,7 @@ Andromeda with italic styling for keywords and comments.
 ![Aurora preview](images/aurora.png)
 
 ### Tokyo Nebula Eclipse
-Stealth monochrome over the Tokyo Night base, for distraction-free coding.
+Stealth monochrome over the Tokyo Nebula base, for distraction-free coding.
 
 ![Eclipse preview](images/eclipse.png)
 
@@ -47,8 +49,10 @@ Navy, low-contrast variant with operator emphasis and subtle borders.
 Tokyo Nebula for Zed is published as a separate repository:
 [**juanarrow-io/tokyo-nebula-zed**](https://github.com/juanarrow-io/tokyo-nebula-zed).
 
-In Zed: open the command palette (`cmd-shift-p`), run `zed: install dev extension`,
-and pick a local clone of that repo.
+1. Open `zed: extensions`
+2. Search for **Tokyo Nebula**
+3. Click **Install**, then reload
+4. `theme: selector toggle` > **Tokyo Nebula Andromeda** (or pick a variant)
 
 ## Credits
 
